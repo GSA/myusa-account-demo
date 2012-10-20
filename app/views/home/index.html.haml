@@ -1,0 +1,28 @@
+= render :partial => 'header'
+.row
+  .eight.columns
+    %h4
+      We're going to help you fill out the forms you need.
+    %p
+      By answering a few simple questions up front, we'll automatically fill out as much of form(s) as we can for you.
+      = form_tag start_path do
+        - unless flash[:error].nil?
+          = label_tag 'error', :class => 'error' do
+            = flash[:error]
+        %fieldset
+          %legend  
+            Please tell us your reasons for changing your name.
+          %ol
+            %li.full
+              = label_tag "reason[married]" do
+                = check_box_tag "reason[married]"
+                Getting Married
+            %li.full
+              = label_tag "reason[court_order]" do
+                = check_box_tag "reason[court_order]"
+                Court Order
+        %div.actions
+          = submit_tag 'Continue', :class => 'large button positive'
+          = link_to "No thanks, I'd rather print out the forms", forms_path(@app),  :class => 'button large negative' 
+  .four.columns
+    = render :partial => 'sidebar'

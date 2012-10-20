@@ -1,0 +1,30 @@
+= render :partial => 'header'
+.row
+  .twelve.columns
+    %h4
+      Let's begin with a few simple questions.
+.row
+  .eight.columns
+    = form_tag (@continue_path || address_path) do
+      %fieldset
+        %legend
+          Your current name
+        %p
+          = label_tag 'Title / Prefix'
+          = select_tag 'title', options_for_select(title_options, session[:user][:title]), :include_blank => true
+        %p
+          = label_tag 'First name'
+          = text_field_tag 'first_name', session[:user][:first_name]
+        %p
+          = label_tag 'Middle name'
+          = text_field_tag 'middle_name', session[:user][:middle_name]
+        %p
+          = label_tag 'Last name'
+          = text_field_tag 'last_name', session[:user][:last_name]
+        %p
+          = label_tag 'Suffix'
+          = select_tag 'suffix', options_for_select(suffix_options, session[:user][:suffix]), :include_blank => true
+      %div.actions
+        = submit_tag 'Continue', :class => 'large button positive'
+
+      

@@ -1,0 +1,22 @@
+.row.panel.secondary.group
+  .eight.columns
+    %h5
+      Address
+    %ul.plain
+      - if session[:user][:address].nil? and session[:user][:address2].nil? and session[:user][:city].nil? and session[:user][:state].nil? and session[:user][:zip].nil?
+        = form_tag address_path do
+          = submit_tag '+ Add', :class => 'small secondary button'
+      - else
+        - unless session[:user][:address].blank?
+          %li
+            = session[:user][:address]
+        - unless session[:user][:address2].blank?
+          %li
+            = session[:user][:address2]
+        - unless session[:user][:city].blank? and session[:user][:state].blank? and session[:user][:zip].blank?
+          %li
+            #{session[:user][:city]}, #{session[:user][:state]} #{session[:user][:zip]}
+  .four.columns.align-right
+    = form_tag address_path do
+      = hidden_field_tag 'mode', 'review'
+      = submit_tag 'Edit Address', :class => 'small secondary button'

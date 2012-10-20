@@ -1,0 +1,20 @@
+.row.panel.secondary.group
+  .eight.columns
+    %h5
+      Contact Info  
+    %ul.plain
+      %li
+        = session[:user][:email]
+      %li
+        %span
+          Home phone:
+        = session[:user][:phone_number]
+      %li
+        %span
+          Mobile phone:
+        = session[:user][:mobile_number]
+  .four.columns.align-right
+    = form_tag contact_info_path do
+      = hidden_field_tag 'mode', 'review'
+      = submit_tag 'Edit Contact Information', :class => 'small secondary button'
+

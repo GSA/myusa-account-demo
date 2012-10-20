@@ -1,0 +1,29 @@
+= render :partial => 'header'
+.row
+  .eight.columns
+    = form_tag birthdate_path do
+      %fieldset
+        %legend
+          Your primary address
+          %span
+            where you live most of the time
+        %ol  
+          %li
+            = label_tag "Street Address (first line)"
+            = text_field_tag 'address', session[:user][:address]
+          %li
+            = label_tag "Street Address (second line)"
+            = text_field_tag "address2", session[:user][:address2], :style => 'margin-bottom: 3px;'
+            %span
+              (example: Apt. 914)
+          %li
+            = label_tag "City or town"
+            = text_field_tag 'city', session[:user][:city]
+          %li
+            = label_tag :state
+            = select_tag 'state', options_for_select(us_state_options, session[:user][:state]), :prompt => 'Select one...'
+          %li
+            = label_tag "Zip code"
+            = text_field_tag 'zip', session[:user][:zip]
+      %div.actions
+        = submit_tag 'Continue', :class => 'large button'
