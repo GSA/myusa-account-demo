@@ -11,6 +11,7 @@ gem 'json'
 gem 'haml'
 gem 'haml-rails'
 gem 'oauth2'
+gem 'quiet_assets'
 
 # Gems used only for assets and not required
 # in production environments by default.
