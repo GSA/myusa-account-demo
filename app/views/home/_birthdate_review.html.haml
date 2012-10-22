@@ -4,9 +4,8 @@
       Date of Birth
     %ul.plain
       %li
-        = session[:user][:date_of_birth]
+        = session["user"]["date_of_birth"]
   .four.columns.align-right
-    = form_tag birthdate_path do
-      = hidden_field_tag 'mode', 'review'
+    = form_tag info_path(:step => 'birthdate', :mode => 'review') do
       = submit_tag 'Edit Date of Birth', :class => 'small secondary button'
           

@@ -4,17 +4,16 @@
       Contact Info  
     %ul.plain
       %li
-        = session[:user][:email]
+        = session["user"]["email"]
       %li
         %span
           Home phone:
-        = session[:user][:phone_number]
+        = session["user"]["phone_number"]
       %li
         %span
           Mobile phone:
-        = session[:user][:mobile_number]
+        = session["user"]["mobile_number"]
   .four.columns.align-right
-    = form_tag contact_info_path do
-      = hidden_field_tag 'mode', 'review'
+    = form_tag info_path(:step => 'contact_info', :mode => 'review') do
       = submit_tag 'Edit Contact Information', :class => 'small secondary button'
 

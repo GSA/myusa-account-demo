@@ -3,19 +3,19 @@
   .twelve.columns
 .row
   .eight.columns
-    = form_tag review_path do
+    = form_tag (@continue_path || info_path(:step => 'review')) do
       %fieldset
         %legend
           What's the best way to reach you?
         %ol
           %li
             = label_tag "Email address"
-            = text_field_tag "email", session[:user][:email]
+            = text_field_tag "user[email]", session["user"]["email"]
           %li
             = label_tag 'Home phone'
-            = text_field_tag "phone_number", session[:user][:phone_number]
+            = text_field_tag "user[phone_number]", session["user"]["phone_number"]
           %li
             = label_tag 'Mobile phone'
-            = text_field_tag "mobile_number", session[:user][:mobile_number]
+            = text_field_tag "user[mobile_number]", session["user"]["mobile_number"]
       %div.clear.actions
         = submit_tag 'Continue', :class => 'large button'

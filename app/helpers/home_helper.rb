@@ -70,5 +70,9 @@ module HomeHelper
   
   def marital_status_options
     [["Single", "single"], ["Married", "married"], ["Divorced", "divorced"], ["Domestic Partnership", "domestic_partnership"], ["Widowed", "widowed"]]
-  end  
+  end
+  
+  def fill_pdf_path(pdf_url, user)
+    "#{MYGOV_HOME}/pdfs/fill?pdf=#{pdf_url}&#{user.collect{|k,v| "profile[#{k}]=#{v}"}.join("&")}"
+  end
 end

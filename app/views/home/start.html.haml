@@ -7,12 +7,12 @@
           Here are the places you'll have to change your name.  We'll walk you through getting as much done online as possible.
         .panel.listing
           %ul.summary
-            - if session[:reason][:married].present?
+            - if session[:reasons][:married].present?
               %li
                 %strong
                   Get a new Social Security card
                 with the Social Security Agency
-            - if session[:reason][:court_order].present?
+            - if session[:reasons][:court_order].present?
               %li
                 %strong
                   Get a new passport

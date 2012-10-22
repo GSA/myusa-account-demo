@@ -14,12 +14,12 @@
             Please tell us your reasons for changing your name.
           %ol
             %li.full
-              = label_tag "reason[married]" do
-                = check_box_tag "reason[married]"
+              = label_tag "reasons[married]" do
+                = check_box_tag "reasons[married]"
                 Getting Married
             %li.full
-              = label_tag "reason[court_order]" do
-                = check_box_tag "reason[court_order]"
+              = label_tag "reasons[court_order]" do
+                = check_box_tag "reasons[court_order]"
                 Court Order
         %div.actions
           = submit_tag 'Continue', :class => 'large button positive'

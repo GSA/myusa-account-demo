@@ -19,13 +19,13 @@
   .twelve.columns
     %h5
       Don't want to create an account?  You can still download the forms with some information pre-filled.
-    - if session[:reason][:married].present?
+    - if session[:reasons][:married].present?
       %p
-        = link_to 'Download SS-5 (PDF)', fill_pdf_path(:format => :pdf, :pdf => "http://ssa.gov/online/ss-5.pdf"), :method => :post, :class => 'pdf_form', :target => "_blank"
+        = link_to 'Download SS-5 (PDF)', fill_pdf_path("http://www.socialsecurity.gov/online/ss-5.pdf", session["user"]), :target => "_blank"
         %br
         (Partially filled out for you)
-    - if session[:reason][:court_order].present?
+    - if session[:reasons][:court_order].present?
       %p
-        = link_to 'Download Passport Form', fill_pdf_path(:format => :pdf, :pdf => "http://www.state.gov/documents/organization/79960.pdf"), :method => :post, :class => 'pdf_form', :target => "_blank"
+        = link_to 'Download Passport Form', fill_pdf_path("http://www.state.gov/documents/organization/79960.pdf", session["user"]), :target => "_blank"
         %br
         (Partially filled out for you)

@@ -67,5 +67,6 @@ module MygovChangeYourName
   end
 end
 
+MYGOV_HOME = "http://localhost:3001"
 MYGOV_CLIENT_ID = "bptmkxtgva7j6w8mdxoxgx161"
 MYGOV_SECRET_ID = "784ald8ma0dpzomutcg4wfq3j"

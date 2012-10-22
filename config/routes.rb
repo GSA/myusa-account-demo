@@ -1,17 +1,14 @@
 MygovChangeYourName::Application.routes.draw do
+  get 'oauth_callback' => 'home#oauth_callback'
   post 'start' => 'home#start'
-  get 'forms' => 'home#forms'
+  
   get 'info' => 'home#info'
-  post 'address' => 'home#address'
-  post 'birthdate' => 'home#birthdate'
-  post 'contact_info' => 'home#contact_info'
-  get 'review' => 'home#review'
-  post 'review' => 'home#review'
+  post 'info' => 'home#info'
+  
+  get 'forms' => 'home#forms'
   post 'forms' => 'home#forms'
   get 'save' => 'home#save'
-  post 'fill_pdf' => 'home#fill_pdf'
   get 'finish' => 'home#finish'
-  get 'oauth_callback' => 'home#oauth_callback'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
