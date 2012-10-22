@@ -6,12 +6,13 @@ gem 'rails', '3.2.6'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
-
+gem 'jquery-rails'
 gem 'json'
 gem 'haml'
 gem 'haml-rails'
 gem 'oauth2'
 gem 'quiet_assets'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -25,7 +26,17 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+group :development, :test do
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'launchy'
+  gem 'database_cleaner'
+  gem 'shoulda-matchers'
+  gem 'simplecov', :require => false
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
