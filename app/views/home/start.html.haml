@@ -22,7 +22,7 @@
         %p
           Would you like to sign in and prefill your data from your MyGov Account?
         = link_to 'Use MyGov', @mygov_authorize_url
-        = link_to 'No thanks', info_path
+        = link_to 'No thanks', info_path(:step => 'name')
   
   .four.columns
     = render :partial => 'sidebar'  

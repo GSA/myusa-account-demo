@@ -18,4 +18,4 @@
             #{session["user"]["city"]}, #{session["user"]["state"]} #{session["user"]["zip"]}
   .four.columns.align-right
     = form_tag info_path(:step => 'address', :mode => 'review') do
-      = submit_tag 'Edit Address', :class => 'small secondary button'
+      = submit_tag 'Edit address', :class => 'small secondary button'

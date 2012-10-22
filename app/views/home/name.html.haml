@@ -10,19 +10,19 @@
         %legend
           Your current name
         %p
-          = label_tag 'Title / Prefix'
+          = label_tag 'user[title]', 'Title / Prefix'
           = select_tag 'user[title]', options_for_select(title_options, session["user"]["title"]), :include_blank => true
         %p
-          = label_tag 'First name'
+          = label_tag 'user[first_name]', 'First name'
           = text_field_tag 'user[first_name]', session["user"]["first_name"]
         %p
-          = label_tag 'Middle name'
+          = label_tag 'user[middle_name]', 'Middle name'
           = text_field_tag 'user[middle_name]', session["user"]["middle_name"]
         %p
-          = label_tag 'Last name'
+          = label_tag 'user[last_name]', 'Last name'
           = text_field_tag 'user[last_name]', session["user"]["last_name"]
         %p
-          = label_tag 'Suffix'
+          = label_tag 'user[suffix]', 'Suffix'
           = select_tag 'user[suffix]', options_for_select(suffix_options, session["user"]["suffix"]), :include_blank => true
       %div.actions
         = submit_tag 'Continue', :class => 'large button positive'

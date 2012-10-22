@@ -23,6 +23,6 @@
                 Court Order
         %div.actions
           = submit_tag 'Continue', :class => 'large button positive'
-          = link_to "No thanks, I'd rather print out the forms", forms_path(@app),  :class => 'button large negative' 
+          = link_to "No thanks, I'd rather print out the forms", forms_path(:reasons => {:married => "1", :court_order => "1"}),  :class => 'button large negative' 
   .four.columns
     = render :partial => 'sidebar'
