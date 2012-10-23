@@ -52,9 +52,6 @@ describe "ChangeYourName" do
       page.should have_content 'Good job! Now we\'re going to take all that info you gave us and pre-fill as much of the form(s) as we can.'
       page.should have_content 'Download SS-5 (PDF)'
       page.should_not have_content 'Download Passport Form'
-      click_link 'Save and continue to forms'
-      
-      page.should have_content 'We will show you tasks here.'
     end
     
     it "should allow a user to skip entering any information and proceed immedieately to downloading forms" do

@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
-  before_filter :reset_session, :only => [:index]
+  before_filter :setup_session_user
+  before_filter :reset_session, :only => [:start]
   before_filter :merge_params_to_session
   before_filter :setup_mygov_client
   before_filter :setup_mygov_access_token
@@ -10,7 +11,7 @@ class HomeController < ApplicationController
     if session[:code]
       @mygov_access_token = @mygov_client.auth_code.get_token(session[:code], :redirect_uri => oauth_callback_url)
       session[:token] = @mygov_access_token.token
-      session[:user] = JSON.parse(@mygov_access_token.get("/api/profile.json").body)["user"] if session[:user].nil?
+      session[:user] = JSON.parse(@mygov_access_token.get("/api/profile.json").body)["user"] if session[:user].nil? or session[:user].empty?
     end
     redirect_to session[:return_to]
   end
@@ -60,6 +61,10 @@ class HomeController < ApplicationController
   
   private
   
+  def setup_session_user
+    session[:user] = {} if session[:user].nil?
+  end
+
   def merge_params_to_session
     session.deep_merge!(params)
   end
@@ -71,7 +76,7 @@ class HomeController < ApplicationController
   def setup_mygov_access_token
     @mygov_access_token = OAuth2::AccessToken.new(@mygov_client, session[:token]) if session[:token]
   end
-  
+      
   def set_continue_path_for_form
     @continue_path = (params[:mode] == "review" ? info_path(:step => 'review') : nil)
   end
