@@ -1,5 +1,6 @@
 MygovChangeYourName::Application.routes.draw do
-  get 'oauth_callback' => 'home#oauth_callback'
+  match "/auth/:provider/callback" => "home#oauth_callback"
+
   post 'start' => 'home#start'
   
   get 'info' => 'home#info'

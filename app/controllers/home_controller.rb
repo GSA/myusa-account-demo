@@ -8,11 +8,9 @@ class HomeController < ApplicationController
   before_filter :transform_date_of_birth_to_string
   
   def oauth_callback
-    if session[:code]
-      @mygov_access_token = @mygov_client.auth_code.get_token(session[:code], :redirect_uri => oauth_callback_url)
-      session[:token] = @mygov_access_token.token
-      session[:user] = JSON.parse(@mygov_access_token.get("/api/profile.json").body)["user"] if session[:user].nil? or session[:user].empty?
-    end
+    auth = request.env["omniauth.auth"]
+    session[:user] = auth.extra.raw_info.to_hash
+    session[:token] = auth.credentials.token
     redirect_to session[:return_to]
   end
 
@@ -26,7 +24,6 @@ class HomeController < ApplicationController
     else
       @button_to_path = info_path(@app)
     end
-    @mygov_authorize_url = @mygov_client.auth_code.authorize_url(:redirect_uri => oauth_callback_url)
     session[:return_to] = info_path(:step => 'review')
   end
     
@@ -52,7 +49,7 @@ class HomeController < ApplicationController
       end
     else
       session[:return_to] = finish_url
-      redirect_to @mygov_client.auth_code.authorize_url(:redirect_uri => oauth_callback_url)
+      redirect_to "/auth/mygov"
     end
   end
   
@@ -64,19 +61,19 @@ class HomeController < ApplicationController
   def setup_session_user
     session[:user] = {} if session[:user].nil?
   end
+  
+  def setup_mygov_client
+    @mygov_client = OAuth2::Client.new(MYGOV_CLIENT_ID, MYGOV_SECRET_ID, :site => 'http://localhost:3001', :token_url => "/oauth/authorize")
+  end
+
+  def setup_mygov_access_token
+    @mygov_access_token = OAuth2::AccessToken.new(@mygov_client, session[:token]) if session
+  end
 
   def merge_params_to_session
     session.deep_merge!(params)
   end
   
-  def setup_mygov_client
-    @mygov_client = OAuth2::Client.new(MYGOV_CLIENT_ID, MYGOV_SECRET_ID, :site => 'http://localhost:3001', :token_url => "/oauth/authorize")
-  end
-  
-  def setup_mygov_access_token
-    @mygov_access_token = OAuth2::AccessToken.new(@mygov_client, session[:token]) if session[:token]
-  end
-      
   def set_continue_path_for_form
     @continue_path = (params[:mode] == "review" ? info_path(:step => 'review') : nil)
   end
