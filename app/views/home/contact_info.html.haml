@@ -13,9 +13,9 @@
             = text_field_tag "user[email]", session["user"]["email"]
           %li
             = label_tag "user[phone_number]", 'Home phone'
-            = text_field_tag "user[phone_number]", session["user"]["phone_number"]
+            = text_field_tag "user[phone_number]", pretty_print_phone(session["user"]["phone_number"])
           %li
             = label_tag "user[mobile_number]", 'Mobile phone'
-            = text_field_tag "user[mobile_number]", session["user"]["mobile_number"]
+            = text_field_tag "user[mobile_number]", pretty_print_phone(session["user"]["mobile_number"])
       %div.clear.actions
         = submit_tag 'Continue', :class => 'large button'

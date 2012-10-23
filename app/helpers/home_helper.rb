@@ -75,4 +75,8 @@ module HomeHelper
   def fill_pdf_path(pdf_url, user)
     "#{MYGOV_HOME}/pdfs/fill?pdf=#{pdf_url}&#{user.collect{|k,v| "profile[#{k}]=#{v}"}.join("&")}"
   end
+  
+  def pretty_print_phone(number)
+    number.blank? ? "" : "#{number[0..2]}-#{number[3..5]}-#{number[6..-1]}"
+  end
 end

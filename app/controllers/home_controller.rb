@@ -6,6 +6,7 @@ class HomeController < ApplicationController
   before_filter :setup_mygov_access_token
   before_filter :set_continue_path_for_form, :only => [:info]
   before_filter :transform_date_of_birth_to_string
+  before_filter :transform_phone_numbers
   
   def oauth_callback
     auth = request.env["omniauth.auth"]
@@ -82,6 +83,13 @@ class HomeController < ApplicationController
     if session["user"] and session["user"]["date_of_birth"] and session["user"]["date_of_birth"].respond_to?(:to_hash)
       dob = session["user"]["date_of_birth"]
       session["user"]["date_of_birth"] = Date.parse("#{dob["year"]}-#{dob["month"]}-#{dob["day"]}").to_s
+    end
+  end
+  
+  def transform_phone_numbers
+    if params[:user]
+      params[:user][:phone_number].gsub!(/-/, "") if params[:user][:phone_number]
+      params[:user][:mobile_number].gsub!(/-/, "") if params[:user][:mobile_number]
     end
   end
 end

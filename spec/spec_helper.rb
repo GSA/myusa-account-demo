@@ -7,6 +7,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
+require 'webmock/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -51,4 +52,34 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+  
+  config.include IntegrationSpecHelper, :type => :request
 end
+
+Capybara.default_host = 'http://example.org'
+
+OmniAuth.config.test_mode = true
+OmniAuth.config.add_mock(:mygov, {
+  :uid => '12345',
+  :name => 'Greg Gershman',
+  :extra => {
+    :raw_info => {
+      :id => '12345',
+      :title => 'Mr.',
+      :first_name => 'Joe',
+      :middle_name => 'Q.',
+      :last_name => 'Citizen',
+      :address => '123 Evergreen Terr',
+      :city => 'Springfield',
+      :state => 'IL',
+      :zip => '12345',
+      :phone_number => '1233455667',
+      :mobile_number => '2345678901',
+      :email => 'joe@citizen.org',
+      :date_of_birth => '1990-01-01'
+    }
+  },
+  :credentials => {
+    :token => 'FAKE_TOKEN'
+  }
+})

@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe "ChangeYourName" do
   describe "GET /" do
+    before do
+      stub_request(:post, "/api/tasks").to_return(:status => 200, :body => {:status => "OK", :task => {:name => 'Change your name', :url => 'http://ssa.gov/form.pdf'} })
+    end
+    
     it "should require the user to select a reason for changing their name" do
       visit root_path
       click_button 'Continue'
@@ -65,26 +69,23 @@ describe "ChangeYourName" do
       visit root_path
       check 'Getting Married'
       click_button 'Continue'
-      # click_link 'Use MyGov'
-      
-      # fake-login the user
-      session[:user] = { title: 'Mr.', first_name: 'Joe', middle_name: 'Q.', last_name: 'Citizen', address: '123 Evergreen Terr', city: 'Springfield', state: 'IL', zip: 12345, date_of_birth: Date.parse('1990-01-01'), phone_number: '123-345-5667', email: 'joe@citizen.org' }
-      
+      click_link 'Use MyGov'
+                  
       visit info_path(:step => 'review')
       page.should have_content 'Mr. Joe Q. Citizen'
       page.should have_content '123 Evergreen Terr'
-      page.should have_content 'Sprinfield, IL 12345'
+      page.should have_content 'Springfield, IL 12345'
       page.should have_content '1990-01-01'
       page.should have_content 'joe@citizen.org'
       page.should have_content '123-345-5667'
       
       click_button 'Edit name'
       fill_in 'First name', :with => 'Joseph'
-      fill_un 'Middle name', :with => 'Quiggley'
+      fill_in 'Middle name', :with => 'Quiggley'
       click_button 'Continue'
       page.should have_content 'Mr. Joseph Quiggley Citizen'
       page.should have_content '123 Evergreen Terr'
-      page.should have_content 'Sprinfield, IL 12345'
+      page.should have_content 'Springfield, IL 12345'
       page.should have_content '1990-01-01'
       page.should have_content 'joe@citizen.org'
       page.should have_content '123-345-5667'
@@ -95,7 +96,7 @@ describe "ChangeYourName" do
       click_button 'Continue'
       page.should have_content 'Mr. Joseph Quiggley Citizen'
       page.should have_content '1234 Evergreen Terr'
-      page.should have_content 'Sprinfield, IL 23456'
+      page.should have_content 'Springfield, IL 23456'
       page.should have_content '1990-01-01'
       page.should have_content 'joe@citizen.org'
       page.should have_content '123-345-5667'
@@ -105,7 +106,7 @@ describe "ChangeYourName" do
       click_button 'Continue'
       page.should have_content 'Mr. Joseph Quiggley Citizen'
       page.should have_content '1234 Evergreen Terr'
-      page.should have_content 'Sprinfield, IL 23456'
+      page.should have_content 'Springfield, IL 23456'
       page.should have_content '1991-01-01'
       page.should have_content 'joe@citizen.org'
       page.should have_content '123-345-5667'
@@ -116,8 +117,8 @@ describe "ChangeYourName" do
       click_button 'Continue'
       page.should have_content 'Mr. Joseph Quiggley Citizen'
       page.should have_content '1234 Evergreen Terr'
-      page.should have_content 'Sprinfield, IL 23456'
-      page.should have_content '1990-01-01'
+      page.should have_content 'Springfield, IL 23456'
+      page.should have_content '1991-01-01'
       page.should have_content 'joe@citizen.org'
       page.should have_content '123-456-7890'
       page.should have_content '234-567-8901'

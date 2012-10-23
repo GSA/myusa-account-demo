@@ -8,11 +8,11 @@
       %li
         %span
           Home phone:
-        = session["user"]["phone_number"]
+        = pretty_print_phone(session["user"]["phone_number"])
       %li
         %span
           Mobile phone:
-        = session["user"]["mobile_number"]
+        = pretty_print_phone(session["user"]["mobile_number"])
   .four.columns.align-right
     = form_tag info_path(:step => 'contact_info', :mode => 'review') do
       = submit_tag 'Edit contact information', :class => 'small secondary button'
