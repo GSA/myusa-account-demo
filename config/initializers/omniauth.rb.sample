@@ -1,3 +1,4 @@
+MYGOV_HOME="https://my.usa.gov"
 MYGOV_CLIENT_ID = ""
 MYGOV_SECRET_ID = ""
 
