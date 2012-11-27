@@ -4,6 +4,13 @@ describe "ChangeYourName" do
   describe "GET /" do
     before do
       stub_request(:post, "/api/tasks").to_return(:status => 200, :body => {:status => "OK", :task => {:name => 'Change your name', :url => 'http://ssa.gov/form.pdf'} })
+      stub_request(:post, "http://localhost:3001/api/forms").
+               with(:body => {"data"=>{"id"=>"12345", "title"=>"Mr.", "first_name"=>"Joseph", "middle_name"=>"Quiggley", "last_name"=>"Citizen", "address"=>"1234 Evergreen Terr", "city"=>"Springfield", "state"=>"IL", "zip"=>"23456", "phone_number"=>"1234567890", "mobile_number"=>"2345678901", "email"=>"joe@citizen.org", "date_of_birth"=>"1991-01-01", "suffix"=>"", "address2"=>""}, "form_number"=>"ss-5"},
+                    :headers => {'Accept'=>'*/*', 'Authorization'=>'Bearer FAKE_TOKEN', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Ruby'}).
+               to_return(:status => 200, :body => "[]", :headers => {})
+      stub_request(:post, "http://localhost:3001/api/tasks?task%5Bname%5D=Change%20your%20name&task%5Btask_items_attributes%5D%5Bname%5D=Get%20a%20new%20Social%20Security%20card&task%5Btask_items_attributes%5D%5Burl%5D=http://www.socialsecurity.gov/online/ss-5.pdf").
+              with(:headers => {'Accept'=>'*/*', 'Authorization'=>'Bearer FAKE_TOKEN', 'Content-Length'=>'0', 'User-Agent'=>'Ruby'}).
+              to_return(:status => 200, :body => '{"status": "OK"}', :headers => {})
     end
     
     it "should require the user to select a reason for changing their name" do
@@ -53,7 +60,7 @@ describe "ChangeYourName" do
       page.should have_content 'Review your information'
       click_button 'Continue to Download Forms'
       
-      page.should have_content 'Good job! Now we\'re going to take all that info you gave us and pre-fill as much of the form(s) as we can.'
+      page.should have_content "Here's a list of the forms you need to file to complete the process"
       page.should have_content 'Download SS-5 (PDF)'
       page.should_not have_content 'Download Passport Form'
     end
@@ -125,12 +132,12 @@ describe "ChangeYourName" do
       
       click_button 'Continue to Download Forms'
       
-      page.should have_content 'Good job! Now we\'re going to take all that info you gave us and pre-fill as much of the form(s) as we can.'
+      page.should have_content "Here's a list of the forms you need to file to complete the process"
       page.should have_content 'Download SS-5 (PDF)'
       page.should_not have_content 'Download Passport Form'
-      click_link 'Save and continue to forms'
+      click_link 'Save'
       
-      page.should have_content 'We will show you tasks here.'
+      page.should have_content "We've saved your work in your MyGov account"
     end
   end
 end
