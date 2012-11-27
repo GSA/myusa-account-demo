@@ -12,6 +12,7 @@ gem 'haml'
 gem 'haml-rails'
 gem 'omniauth-mygov', :path => '/Users/greggersh/rails/mygov/omniauth-mygov'
 gem 'quiet_assets'
+gem 'httparty'
 
 # Gems used only for assets and not required
 # in production environments by default.

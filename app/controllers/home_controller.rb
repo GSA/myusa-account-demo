@@ -35,21 +35,30 @@ class HomeController < ApplicationController
   def forms
   end
   
+  def fill_pdf
+    puts "#{MYGOV_FORMS_HOME}/api/forms/#{params[:id]}/fill_pdf"
+    response = HTTParty.post("#{MYGOV_FORMS_HOME}/api/forms/#{params[:id]}/fill_pdf", :body => {:data => session["user"]})
+    puts response.code
+    if response.code == 200
+      send_data response.body, :type => "application/pdf", :filename => "#{params[:id]}.pdf"
+    else
+      flash[:error] = "Sorry, something went wrong.  Horribly, horribly wrong."
+      render :forms
+    end
+  end
+  
   def save
     if @mygov_access_token
-      task_items = []
-      task_items << {:name => 'Get a new Social Security card', :url => 'http://www.socialsecurity.gov/online/ss-5.pdf'} if session[:reasons][:married].present?
-      task_items << {:name => 'Renew your passport', :url => 'http://www.state.gov/documents/organization/79960.pdf'} if session[:reasons][:court_order].present?
-      response = @mygov_access_token.post("/api/tasks", :params => {:task => {:name => 'Change your name', :task_items_attributes => task_items}})
-      if response.status == 200
-        session[:task] = JSON.parse(response.body)[:task]
+      store_form_data
+      tasks = create_tasks
+      if tasks["status"] == "OK"
         redirect_to finish_path
       else
-        flash[:error] = JSON.prase(response.body)["message"]
+        flash[:error] = JSON.parse(response.body)["message"]
         redirect_to :back
       end
     else
-      session[:return_to] = finish_url
+      session[:return_to] = save_url
       redirect_to "/auth/mygov"
     end
   end
@@ -91,5 +100,22 @@ class HomeController < ApplicationController
       params[:user][:phone_number].gsub!(/-/, "") if params[:user][:phone_number]
       params[:user][:mobile_number].gsub!(/-/, "") if params[:user][:mobile_number]
     end
+  end
+  
+  def store_form_data
+    form_number = 'ss-5' if session[:reasons][:married].present?
+    form_number = '79960' if session[:reasons][:court_order].present?
+    body = {}
+    body.merge!(:form_number => form_number)
+    body.merge!(:data => session[:user])
+    @mygov_access_token.post("/api/forms", :body => body)
+  end
+  
+  def create_tasks
+    task_items = []
+    task_items << {:name => 'Get a new Social Security card', :url => 'http://www.socialsecurity.gov/online/ss-5.pdf'} if session[:reasons][:married].present?
+    task_items << {:name => 'Renew your passport', :url => 'http://www.state.gov/documents/organization/79960.pdf'} if session[:reasons][:court_order].present?
+    tasks_response = @mygov_access_token.post("/api/tasks", :params => {:task => {:name => 'Change your name', :task_items_attributes => task_items}})
+    JSON.parse(tasks_response.body)
   end
 end

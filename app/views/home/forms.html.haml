@@ -1,31 +1,27 @@
 = render :partial => 'header'
 .row
   .nine.columns
-    %h5
-      Good job!  Now we're going to take all that info you gave us and pre-fill as much of the form(s) as we can.
     %p
-      Based on what you've told us, here's the list of forms to complete. (It's probably smart to look over each of these to double check whether it's right for you.)
-.row
-  .nine.columns
-    .panel
-      %h4
-        Save your information and continue completing your forms online
-      %p
-        Get this stuff done when it's convenient to you: work on it later from your computer, smartphone, or tablet.  We'll save both your info and your form(s).  #{ link_to 'Learn more about our security and privacy.', "#" }
-        %br
-        %br
-        = link_to "Save and continue to forms", save_path, :class => "large button positive", :id => 'save-button' 
-.row
-  .twelve.columns
-    %h5
-      Don't want to create an account?  You can still download the forms with some information pre-filled.
-    - if session[:reasons][:married].present?
-      %p
-        = link_to 'Download SS-5 (PDF)', fill_pdf_path("http://www.socialsecurity.gov/online/ss-5.pdf", session["user"]), :target => "_blank"
-        %br
-        (Partially filled out for you)
-    - if session[:reasons][:court_order].present?
-      %p
-        = link_to 'Download Passport Form', fill_pdf_path("http://www.state.gov/documents/organization/79960.pdf", session["user"]), :target => "_blank"
-        %br
-        (Partially filled out for you)
+      OK!  Thanks for giving us all that information.  You're almost finished changing your name.  Here's a list of the forms you need to file to complete the process.
+    %table.nine
+      %tbody
+        - if session[:reasons][:married].present?
+          %tr
+            %td
+              Get a new Social Security Card
+            %td
+              = link_to 'Download SS-5 (PDF)', fill_pdf_path("ss-5"), :target => "_blank"
+              (Partially filled out for you)
+        - if session[:reasons][:court_order].present?
+          %tr
+            %td
+              Get a new Passport
+            %td
+              = link_to 'Download Passport Form (PDF)', fill_pdf_path("79960"), :target => "_blank"
+              (Partially filled out for you)
+  .three.columns
+    %h4
+      Save to MyGov?
+    %p
+      Saving your work to your MyGov account means you can come back later and finish changing your name.  We will keep track of all the forms you need to fill out and help you complete them.
+    = link_to "Save to MyGov", save_path, :class => "large button positive", :id => 'save-button'

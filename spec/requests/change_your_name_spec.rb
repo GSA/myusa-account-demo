@@ -69,7 +69,7 @@ describe "ChangeYourName" do
       visit root_path
       check 'Getting Married'
       click_button 'Continue'
-      click_link 'Use MyGov'
+      click_button 'Use MyGov'
                   
       visit info_path(:step => 'review')
       page.should have_content 'Mr. Joe Q. Citizen'

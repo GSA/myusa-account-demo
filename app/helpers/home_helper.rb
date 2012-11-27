@@ -72,8 +72,8 @@ module HomeHelper
     [["Single", "single"], ["Married", "married"], ["Divorced", "divorced"], ["Domestic Partnership", "domestic_partnership"], ["Widowed", "widowed"]]
   end
   
-  def fill_pdf_path(pdf_url, user)
-    "#{MYGOV_HOME}/pdfs/fill?pdf=#{pdf_url}&#{user.collect{|k,v| "profile[#{k}]=#{v}"}.join("&")}"
+  def mygov_forms_fill_pdf_path(form_number)
+    "#{MYGOV_FORMS_HOME}/api/forms/#{form_number}/fill_pdf"
   end
   
   def pretty_print_phone(number)

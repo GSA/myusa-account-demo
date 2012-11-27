@@ -21,7 +21,7 @@
       .eight.columns
         %p
           Would you like to sign in and prefill your data from your MyGov Account?
-        = link_to 'Use MyGov', "/auth/mygov"
+        = button_to 'Use MyGov', "/auth/mygov", :class => 'medium button positive', :style => 'float: left;' 
         = link_to 'No thanks', info_path(:step => 'name')
   
   .four.columns
