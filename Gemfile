@@ -10,7 +10,7 @@ gem 'jquery-rails'
 gem 'json'
 gem 'haml'
 gem 'haml-rails'
-gem 'omniauth-mygov', :path => '/Users/greggersh/rails/mygov/omniauth-mygov'
+gem 'omniauth-mygov', :git => 'https://github.com/GSA-OCSIT/omniauth-mygov.git'
 gem 'quiet_assets'
 gem 'httparty'
 
