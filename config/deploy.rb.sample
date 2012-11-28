@@ -35,6 +35,5 @@ namespace :deploy do
   task :symlink_db, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{deploy_to}/shared/config/initializers/01_mygov.rb #{release_path}/config/initializers/01_mygov.rb"
-    run "ln -nfs #{deploy_to}/shared/config/initializers/omniauth.rb #{release_path}/config/initializers/omniauth.rb"
   end
 end
