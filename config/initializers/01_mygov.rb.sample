@@ -3,6 +3,7 @@ if Rails.env == "production"
   MYGOV_FORMS_HOME="https://forms.usa.gov"
   MYGOV_CLIENT_ID = ""
   MYGOV_SECRET_ID = ""
+  MYGOV_CLIENT_OPTIONS = {:site => "https://my.usa.gov", :token_url => "/oauth/authorize", :ssl => {:ca_file => "/etc/ssl/certs/ca-bundle.crt"}}
 else
   MYGOV_HOME="http://localhost:3001"
   MYGOV_FORMS_HOME="http://localhost:3002"
@@ -10,5 +11,5 @@ else
   MYGOV_SECRET_ID = ""
 end
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :mygov, MYGOV_CLIENT_ID, MYGOV_SECRET_ID, :client_options => {:site => "https://my.usa.gov", :token_url => "/oauth/authorize"}
+  provider :mygov, MYGOV_CLIENT_ID, MYGOV_SECRET_ID, :client_options => MYGOV_CLIENT_OPTIONS
 end
