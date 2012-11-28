@@ -15,7 +15,6 @@
 /tmp
 /coverage
 .DS_Store
-/config/initializers/omniauth.rb
 /config/database.yml
 /config/initializers/01_mygov.rb
 /config/deploy.rb
