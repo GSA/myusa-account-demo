@@ -2,8 +2,6 @@ MYGOV_HOME="https://my.usa.gov"
 MYGOV_FORMS_HOME="https://forms.usa.gov"
 MYGOV_CLIENT_ID = ""
 MYGOV_SECRET_ID = ""
-MYGOV_CLIENT_OPTIONS = {:site => "https://my.usa.gov", :token_url => "/oauth/authorize", :ssl => {:ca_file => "/etc/ssl/certs/ca-bundle.crt"}}
-
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :mygov, MYGOV_CLIENT_ID, MYGOV_SECRET_ID, :client_options => MYGOV_CLIENT_OPTIONS
+  provider :mygov, MYGOV_CLIENT_ID, MYGOV_SECRET_ID, :client_options => {:site => MYGOV_HOME, :token_url => "/oauth/authorize"}
 end
