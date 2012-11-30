@@ -13,6 +13,7 @@ gem 'haml-rails'
 gem 'omniauth-mygov', :git => 'https://github.com/GSA-OCSIT/omniauth-mygov.git'
 gem 'quiet_assets'
 gem 'httparty'
+gem 'capistrano'
 
 # Gems used only for assets and not required
 # in production environments by default.
