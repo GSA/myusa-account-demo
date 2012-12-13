@@ -1,27 +1,24 @@
-= render :partial => 'header'
 .row
-  .nine.columns
+  .eight.columns
     %p
-      OK!  Thanks for giving us all that information.  You're almost finished changing your name.  Here's a list of the forms you need to file to complete the process.
-    %table.nine
-      %tbody
+      You're on your way to changing your name.  Here's your list of the partially filled out forms you need to file to complete the process.
+    %ul
+      %li
         - if session[:reasons][:married].present?
-          %tr
-            %td
-              Get a new Social Security Card
-            %td
-              = link_to 'Download SS-5 (PDF)', fill_pdf_path("ss-5"), :target => "_blank"
-              (Partially filled out for you)
+          %h3
+            Get a new Social Security Card
+          %span
+            = link_to 'Download SS-5 (PDF)', fill_pdf_path("ss-5"), :target => "_blank"
+            (Partially filled out for you)
         - if session[:reasons][:court_order].present?
-          %tr
-            %td
+          %li
+            %h3
               Get a new Passport
-            %td
+            %span
               = link_to 'Download Passport Form (PDF)', fill_pdf_path("79960"), :target => "_blank"
               (Partially filled out for you)
-  .three.columns
     %h4
-      Save to MyGov?
+      Save this to a MyGov account
     %p
       Saving your work to your MyGov account means you can come back later and finish changing your name.  We will keep track of all the forms you need to fill out and help you complete them.
     = link_to "Save to MyGov", save_path, :class => "large button positive", :id => 'save-button'

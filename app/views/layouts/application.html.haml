@@ -9,24 +9,25 @@
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+    = stylesheet_link_tag "mff/core", :media => "all"
     = stylesheet_link_tag "application", :media => "all"
     = favicon_link_tag 'favicon.png', :rel => 'shortcut icon'
 
   %body
-    %div#header
-      .nav-container.group
-        .row
-          .twelve.columns
-            %h1
-              Change your name - My<span>Gov</span>
-    %div#wrap
-      %div#main
-        .nav-container.group
-          .row
-            .twelve.columns
-        .container.group
-          = yield          
-      
+    .container.group
+      .row.application
+        .twelve.columns      
+          #header
+            .app-title
+              %h1
+                Change your name
+          #main
+            .content
+              = yield          
+          
+        #footer
+          %p
+            USA.gov is the U.S. government&rsquo;s offical web portal.
       /
         Javascripts
         \==================================================
