@@ -36,9 +36,7 @@ class HomeController < ApplicationController
   end
   
   def fill_pdf
-    puts "#{MYGOV_FORMS_HOME}/api/forms/#{params[:id]}/fill_pdf"
     response = HTTParty.post("#{MYGOV_FORMS_HOME}/api/forms/#{params[:id]}/fill_pdf", :body => {:data => session["user"]})
-    puts response.code
     if response.code == 200
       send_data response.body, :type => "application/pdf", :filename => "#{params[:id]}.pdf"
     else
