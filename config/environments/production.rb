@@ -28,7 +28,9 @@ MygovChangeYourName::Application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
+  # Turn SSL off for all static assets (everything under public/).  See http://justinleitgeb.com/?p=148
+  config.ssl_options = { :exclude => proc { |env| env['PATH_INFO'].start_with?('/public') } }
 
   # See everything in the log (default is :info)
   # config.log_level = :debug
