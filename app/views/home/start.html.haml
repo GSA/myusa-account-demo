@@ -18,7 +18,7 @@
               
       %p
         Would you like to sign in and prefill your data from your MyGov Account?
-      = button_to 'Use MyGov', "/auth/mygov", :class => 'large button positive' 
+      = button_to 'Use MyGov', "auth/mygov", :class => 'large button positive' 
       = link_to 'Continue as a guest', info_path(:step => 'name'), :class => 'large button negative'
   
   .four.columns
