@@ -1,7 +1,7 @@
-MYGOV_HOME="https://my.usa.gov"
-MYGOV_FORMS_HOME="https://forms.usa.gov"
+MYGOV_HOME="http://localhost:3000"
+MYGOV_FORMS_HOME="http://localhost:3001"
 MYGOV_CLIENT_ID = ""
 MYGOV_SECRET_ID = ""
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :mygov, MYGOV_CLIENT_ID, MYGOV_SECRET_ID, :client_options => {:site => MYGOV_HOME, :token_url => "/oauth/authorize"}, :scope => ["profile", "tasks", "submit_forms"]
+  provider :mygov, MYGOV_CLIENT_ID, MYGOV_SECRET_ID, :client_options => {:site => MYGOV_HOME, :token_url => "/oauth/authorize"}, :scope => ["profile", "tasks", "submit_forms", "notifications"]
 end

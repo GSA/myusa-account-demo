@@ -16,8 +16,7 @@ class HomeController < ApplicationController
   end
 
   def logout
-    flash[:success] = "Goodbye!"
-    session[:user] = nil
+    session[:user] = nil # :before_filter sets to empty hash
     redirect_to root_url
   end
 
@@ -39,14 +38,10 @@ class HomeController < ApplicationController
     session.deep_merge!(params)
   end
   
-  
-  def transform_phone_numbers
-    if params[:user]
-      params[:user][:phone_number].gsub!(/-/, "") if params[:user][:phone_number]
-      params[:user][:mobile_number].gsub!(/-/, "") if params[:user][:mobile_number]
-    end
-  end
-  
+
+  # >>>>>>>>>>>>>>>.
+  # FOR REFERENCE:
+  # >>>>>>>>>>>>>>>
   def store_form_data
     form_number = 'ss-5' if session[:reasons][:married].present?
     form_number = '79960' if session[:reasons][:court_order].present?

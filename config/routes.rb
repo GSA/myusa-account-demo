@@ -1,7 +1,7 @@
 MygovChangeYourName::Application.routes.draw do
   match "/auth/:provider/callback" => "home#oauth_callback"
-
   post "/logout" => "home#logout"  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
