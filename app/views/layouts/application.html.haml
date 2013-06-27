@@ -18,8 +18,11 @@
         .twelve.columns      
           #header
             .app-title
-              %h1
-                Change your name
+              %a{ :href => root_url }
+                %h1
+                  %span.hide-text
+                    MyUSA Authentication
+                  Demo
           #main
             .content
               = yield          

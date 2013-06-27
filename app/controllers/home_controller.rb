@@ -4,66 +4,23 @@ class HomeController < ApplicationController
   before_filter :merge_params_to_session
   before_filter :setup_mygov_client
   before_filter :setup_mygov_access_token
-  before_filter :set_continue_path_for_form, :only => [:info]
-  before_filter :transform_date_of_birth_to_string
-  before_filter :transform_phone_numbers
   
   def oauth_callback
     auth = request.env["omniauth.auth"]
     session[:user] = auth.extra.raw_info.to_hash
     session[:token] = auth.credentials.token
-    redirect_to session[:return_to]
+    redirect_to session[:return_to] || root_url
   end
 
   def index
   end
-  
-  def start
-    if params[:reasons].nil?
-      flash[:error] = "Please select at least one reason."
-      redirect_to :back
-    else
-      @button_to_path = info_path(@app)
-    end
-    session[:return_to] = info_path(:step => 'review')
+
+  def logout
+    flash[:success] = "Goodbye!"
+    session[:user] = nil
+    redirect_to root_url
   end
-    
-  def info
-    render :action => params[:step].to_sym
-  end
-    
-  def forms
-  end
-  
-  def fill_pdf
-    response = HTTParty.post("#{MYGOV_FORMS_HOME}/api/forms/#{params[:id]}/fill_pdf", :body => {:data => session["user"]})
-    if response.code == 200
-      send_data response.body, :type => "application/pdf", :filename => "#{params[:id]}.pdf"
-    else
-      flash[:error] = "Sorry, something went wrong.  Horribly, horribly wrong."
-      render :forms
-    end
-  end
-  
-  def save
-    if @mygov_access_token
-      store_form_data
-      tasks = create_tasks
-      if tasks["status"] == "OK"
-        redirect_to finish_path
-      else
-        flash[:error] = JSON.parse(response.body)["message"]
-        redirect_to :back
-      end
-    else
-      session[:return_to] = save_url
-      redirect_to "/auth/mygov"
-    end
-  end
-  
-  def finish
-  end
-  
+
   private
   
   def setup_session_user
@@ -82,16 +39,6 @@ class HomeController < ApplicationController
     session.deep_merge!(params)
   end
   
-  def set_continue_path_for_form
-    @continue_path = (params[:mode] == "review" ? info_path(:step => 'review') : nil)
-  end
-  
-  def transform_date_of_birth_to_string
-    if session["user"] and session["user"]["date_of_birth"] and session["user"]["date_of_birth"].respond_to?(:to_hash)
-      dob = session["user"]["date_of_birth"]
-      session["user"]["date_of_birth"] = Date.parse("#{dob["year"]}-#{dob["month"]}-#{dob["day"]}").to_s
-    end
-  end
   
   def transform_phone_numbers
     if params[:user]

@@ -1,8 +1,8 @@
 require 'bundler/capistrano'
 
-set :application, "mygov-change-your-name"
+set :application, "myusa-account-demo"
 set :scm, "git"
-set :repository, "git@github.com:GSA-OCSIT/mygov-change-your-name.git"
+set :repository, "git@github.com:GSA-OCSIT/myusa-account-demo.git"
 # Use this if you're stuck behind a draconion VPN
 # set(:real_revision) { source.query_revision( revision ) { |cmd| capture(cmd) } }
 set :use_sudo, false

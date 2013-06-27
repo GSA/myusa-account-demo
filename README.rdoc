@@ -1,7 +1,0 @@
-This is an example of how to use the MyGov API to build an application.
-
-This app demonstrates a number of things:
-
-1.  Authorizing the app to retrieve a citizen's MyGov profile information.
-2.  Getting a pre-filled PDF from MyGov
-3.  Creating a task for a user.

@@ -1,12 +1,7 @@
 MygovChangeYourName::Application.routes.draw do
   match "/auth/:provider/callback" => "home#oauth_callback"
-  post 'start' => 'home#start'
-  match 'info' => 'home#info'  
-  match 'forms' => 'home#forms'
-  get "forms/:id/fill_pdf" => 'home#fill_pdf', :as => :fill_pdf
-  get 'save' => 'home#save'
-  get 'finish' => 'home#finish'
-  
+
+  post "/logout" => "home#logout"  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

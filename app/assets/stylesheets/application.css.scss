@@ -11,7 +11,7 @@
  *= require_self
  */
 
-/*** USA dot gov Change your Name ***/
+/*** MyUSA Demo ***/
 
 html, body {background: #F7F7F7;}
 
@@ -37,10 +37,16 @@ html, body {background: #F7F7F7;}
 
 #header h1 {
   font-size: 2em; 
-  display: block; 
-  color: #755224; 
-  background: image-url("logo.png") 10px 10px no-repeat; 
-  padding: 96px 1em 0 2%;
+  display: block;  
+  background: image-url("logo.png") left center no-repeat; 
+  padding: 20px 0 20px 320px;
+  margin: 10px;
+  background-size: contain;
+}
+
+.hide-text {
+  display: none;
+  visibility: none;
 }
 
 .app-title {

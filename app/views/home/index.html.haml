@@ -1,35 +1,47 @@
-.row
-  .eight.columns
-    %h3
-      We're going to help you fill out the forms you need.
+/ .row
+/   .eight.columns
+/     %h3
+/       We're going to help you fill out the forms you need.
 
-    %ol
-      %li
-        We'll ask you a few questions about yourself (basic stuff).
-      %li
-        We'll prefill as much of the forms as we can to help you on your way.
-      %li
-        You'll have the option to save all of your tasks and info in a MyGov account so you can come back and finish later.
-      %li
-        (We won't share your info with anyone, we promise.) 
+/     %ol
+/       %li
+/         We'll ask you a few questions about yourself (basic stuff).
+/       %li
+/         We'll prefill as much of the forms as we can to help you on your way.
+/       %li
+/         You'll have the option to save all of your tasks and info in a MyGov account so you can come back and finish later.
+/       %li
+/         (We won't share your info with anyone, we promise.) 
       
  
-    = form_tag start_path do
-      - unless flash[:error].nil?
-        = label_tag 'error', :class => 'error' do
-          = flash[:error]
-      %fieldset
-        %legend  
-          Please tell us your reasons for changing your name.
-        %ol
-          %li.full
-            = label_tag "reasons[married]" do
-              = check_box_tag "reasons[married]"
-              Getting Married
-          %li.full
-            = label_tag "reasons[court_order]" do
-              = check_box_tag "reasons[court_order]"
-              Court Order
-      %div.actions
-        = submit_tag 'Continue', :class => 'large button positive'
-        
+/     = form_tag start_path do
+/       - unless flash[:error].nil?
+/         = label_tag 'error', :class => 'error' do
+/           = flash[:error]
+/       %fieldset
+/         %legend  
+/           Please tell us your reasons for changing your name.
+/         %ol
+/           %li.full
+/             = label_tag "reasons[married]" do
+/               = check_box_tag "reasons[married]"
+/               Getting Married
+/           %li.full
+/             = label_tag "reasons[court_order]" do
+/               = check_box_tag "reasons[court_order]"
+/               Court Order
+/       %div.actions
+/         = submit_tag 'Continue', :class => 'large button positive'
+/         
+.row
+  .eight.columns
+    %h2
+      User Authentication
+    %p
+      Instantly authenticate users on your website with a MyUSA account. 
+    - if !signed_in?
+      = button_to 'MyUSA Account Login', "auth/mygov", :class => 'large button positive' 
+    - else
+      = button_to 'Logout', "logout", :class => 'large button positive'
+
+= debug session
