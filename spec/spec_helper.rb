@@ -54,9 +54,10 @@ RSpec.configure do |config|
   end
   
   config.include IntegrationSpecHelper, :type => :request
+  config.include Capybara::DSL
 end
 
-Capybara.default_host = 'http://example.org'
+Capybara.default_host = 'http://localhost:3000'
 
 OmniAuth.config.test_mode = true
 OmniAuth.config.add_mock(:mygov, {
@@ -81,5 +82,29 @@ OmniAuth.config.add_mock(:mygov, {
   },
   :credentials => {
     :token => 'FAKE_TOKEN'
+  }
+})
+OmniAuth.config.add_mock(:mygov, {
+  :uid => '9876',
+  :name => 'Sally Shergman',
+  :extra => {
+    :raw_info => {
+      :id => '9876',
+      :title => 'Mr.',
+      :first_name => 'Sally',
+      :middle_name => 'B.',
+      :last_name => 'Shergman',
+      :address => '456 Shanty Town',
+      :city => 'Shergerr',
+      :state => 'CA',
+      :zip => '90001',
+      :phone_number => '5105551234',
+      :mobile_number => '5105554561',
+      :email => 'sally.shergman@gsa.gov',
+      :date_of_birth => '1974-06-01'
+    }
+  },
+  :credentials => {
+    :token => 'FAKE_TOKEN_2'
   }
 })

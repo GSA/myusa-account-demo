@@ -7,6 +7,9 @@
 
     .actions
       - if !signed_in?
-        = button_to 'MyUSA Account Login', "auth/mygov", :class => 'large button positive' 
+        = button_to 'MyUSA Account Login', "auth/mygov", :class => 'large button positive'
       - else
+        %p
+          Currently logged in as: 
+          %b= session['user']['email']
         = button_to 'Logout', "logout", :class => 'large button positive'

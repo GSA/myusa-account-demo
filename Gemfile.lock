@@ -1,7 +1,7 @@
 PATH
   remote: ~/code/gems/omniauth-mygov
   specs:
-    omniauth-mygov (0.0.1)
+    omniauth-mygov (0.0.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
 
