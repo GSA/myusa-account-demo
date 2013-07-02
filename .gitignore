@@ -18,4 +18,3 @@
 /config/database.yml
 /config/deploy.rb
 /config/initializers/01_mygov.rb
-/config/initializers/omniauth.rb
