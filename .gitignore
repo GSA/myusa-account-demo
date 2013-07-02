@@ -18,3 +18,4 @@
 /config/database.yml
 /config/deploy.rb
 /config/initializers/01_mygov.rb
+/config/local_env.yml
