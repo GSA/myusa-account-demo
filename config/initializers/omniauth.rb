@@ -1,7 +1,4 @@
-# MYGOV_HOME="https://my.usa.gov"
-
-# MYGOV_CLIENT_ID = "REGISTER APP WITH MYUSA"
-# MYGOV_SECRET_ID = "REGISTER APP WITH MYUSA"
+# heroku config:set MYGOV_HOME=https://my.usa.gov MYGOV_CLIENT_ID=register_app_with_my_usa MYGOV_SECRET_ID=register_app_with_my_usa
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :mygov, MYGOV_CLIENT_ID, MYGOV_SECRET_ID, :client_options => {:site => MYGOV_HOME, :token_url => "/oauth/authorize"}, :scope => ["profile", "tasks", "submit_forms", "notifications"]
+  provider :mygov, ENV['MYGOV_CLIENT_ID'], ENV['MYGOV_SECRET_ID'], :client_options => {:site => ENV['MYGOV_HOME'], :token_url => "/oauth/authorize"}, :scope => ["profile", "tasks", "submit_forms", "notifications"]
 end
