@@ -1,8 +1,8 @@
 GIT
-  remote: https://github.com/infamousamos/omniauth-mygov.git
-  revision: a6e035a20b819d68c4e5142c80e4bb8004a672e4
+  remote: https://github.com/GSA-OCSIT/omniauth-mygov.git
+  revision: 1f8a5f551ac9b1ce991713066e1eb47b6f347c94
   specs:
-    omniauth-mygov (0.0.1)
+    omniauth-mygov (0.0.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
 

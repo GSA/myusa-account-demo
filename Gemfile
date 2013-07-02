@@ -13,7 +13,7 @@ gem 'jquery-rails'
 gem 'json', "1.7.7"
 gem 'haml'
 gem 'haml-rails'
-gem 'omniauth-mygov', :git => 'https://github.com/infamousamos/omniauth-mygov.git'
+gem 'omniauth-mygov', :git => 'https://github.com/GSA-OCSIT/omniauth-mygov.git'
 gem 'quiet_assets'
 gem 'httparty'
 gem 'capistrano'
